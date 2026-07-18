@@ -4,6 +4,22 @@ This reference document outlines the RESTful endpoints, request/response formats
 
 All relative API endpoints are prefixed with `/api`.
 
+### API Flow Architecture
+```mermaid
+sequenceDiagram
+    participant Client
+    participant Auth Middleware
+    participant API Route
+    participant Prisma
+    
+    Client->>Auth Middleware: Request with JWT Cookie
+    Auth Middleware-->>Client: 401 Unauthorized (if invalid)
+    Auth Middleware->>API Route: Validated Session Payload
+    API Route->>Prisma: Secure Database Query
+    Prisma-->>API Route: Data Response
+    API Route-->>Client: 200 OK (JSON)
+```
+
 ---
 
 ## 1. Authentication APIs
@@ -16,8 +32,10 @@ Creates a new account and assigns it the default `STUDENT_STAFF` role.
     ```json
     {
       "name": "Obi Student",
+      "institutionalId": "RIVA/STU/2026/001",
       "email": "student@riva.edu.ng",
-      "password": "Password123"
+      "password": "Password123",
+      "role": "STUDENT_STAFF"
     }
     ```
 *   **Successful Response (201 Created):**
@@ -27,6 +45,7 @@ Creates a new account and assigns it the default `STUDENT_STAFF` role.
       "user": {
         "id": "e963b652-336c-482a-9e1b-059ad1feea2d",
         "name": "Obi Student",
+        "institutionalId": "RIVA/STU/2026/001",
         "email": "student@riva.edu.ng",
         "role": { "name": "STUDENT_STAFF" },
         "createdAt": "2026-07-06T12:00:00.000Z"
