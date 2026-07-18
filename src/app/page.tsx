@@ -1,12 +1,12 @@
 import React from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { SiDavinciresolve } from "react-icons/si";
 import { 
   Clock, 
   ShieldCheck, 
   ArrowRight,
   ClipboardList,
-  Wrench
 } from "lucide-react";
 
 export default function Home() {
@@ -16,7 +16,7 @@ export default function Home() {
       <header className="px-6 lg:px-12 py-5 bg-white dark:bg-slate-900 border-b border-slate-200/60 dark:border-slate-800 flex items-center justify-between">
         <div className="flex flex-col items-start">
           <div className="flex items-center space-x-2">
-            <Wrench className="h-5 w-5 text-blue-900 dark:text-blue-450 shrink-0" />
+            <SiDavinciresolve className="h-5 w-5 text-blue-900 dark:text-blue-450 shrink-0" />
             <span className="text-xl font-black tracking-wider text-blue-900 dark:text-blue-450">
               RIVA<span className="text-red-600 dark:text-red-500">RESOLVE</span>
             </span>

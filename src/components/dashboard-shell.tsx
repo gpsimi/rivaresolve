@@ -13,8 +13,8 @@ import {
   Menu, 
   X, 
   Bell,
-  Wrench
 } from "lucide-react";
+import { SiDavinciresolve } from "react-icons/si";
 import { Button } from "@/components/ui/button";
 import { UserSession } from "@/lib/auth";
 
@@ -78,7 +78,7 @@ export default function DashboardShell({ children, session }: DashboardShellProp
       <header className="flex md:hidden items-center justify-between px-6 py-4 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 z-30">
         <div className="flex flex-col items-start">
           <div className="flex items-center space-x-1.5">
-            <Wrench className="h-4 w-4 text-blue-900 dark:text-blue-400 shrink-0" />
+            <SiDavinciresolve className="h-4 w-4 text-blue-900 dark:text-blue-400 shrink-0" />
             <span className="text-lg font-black tracking-wider text-blue-900 dark:text-blue-400">
               RIVA<span className="text-red-600 dark:text-red-500">RESOLVE</span>
             </span>
@@ -105,7 +105,7 @@ export default function DashboardShell({ children, session }: DashboardShellProp
           {/* Brand Logo Header */}
           <div className="hidden md:flex flex-col items-start px-6 py-6 border-b border-slate-100 dark:border-slate-800">
             <div className="flex items-center space-x-2">
-              <Wrench className="h-5 w-5 text-blue-900 dark:text-blue-400 shrink-0" />
+              <SiDavinciresolve className="h-5 w-5 text-blue-900 dark:text-blue-400 shrink-0" />
               <span className="text-xl font-black tracking-wider text-blue-900 dark:text-blue-400">
                 RIVA<span className="text-red-600 dark:text-red-500">RESOLVE</span>
               </span>
