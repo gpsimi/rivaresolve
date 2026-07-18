@@ -44,8 +44,9 @@ export default function TrackRequestsPage() {
         }
         const data = await response.json();
         setRequests(data);
-      } catch (err: any) {
-        setError(err.message || "Failed to load requests");
+      } catch (err) {
+        const errorMessage = err instanceof Error ? err.message : "Failed to load requests";
+        setError(errorMessage);
       } finally {
         setLoading(false);
       }

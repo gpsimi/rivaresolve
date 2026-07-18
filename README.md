@@ -1,36 +1,56 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# rivaResolve
 
-## Getting Started
+rivaResolve is a campus maintenance portal built for RIVA Open University. I built this to replace the manual, paper-based workflow for reporting faults on campus (like broken furniture, plumbing issues, or electrical faults). It digitizes the entire process so students can report issues, and admins can assign them to maintenance officers while tracking the resolution progress.
 
-First, run the development server:
+## Tech Stack
+- **Frontend:** Next.js (App Router), Tailwind CSS v4, Shadcn UI
+- **Backend:** Next.js Route Handlers, JSON Web Tokens (JWT) for session management
+- **Database:** PostgreSQL via Supabase, queried with Prisma ORM
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Live Demo & Access
+If you're testing the application, I've seeded the database with a few default accounts so you don't have to register from scratch to see the different dashboards.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Here are the test credentials:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+**1. System Administrator** (Can see all tickets and assign them)
+- **Email:** admin@riva.edu.ng
+- **Password:** Password123
+- **ID:** RIVA-ADM-001
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+**2. Maintenance Officer** (Can see assigned tasks and update their status)
+- **Email:** officer@riva.edu.ng
+- **Password:** Password123
+- **ID:** RIVA-OFF-001
 
-## Learn More
+**3. Student** (Can submit new fault reports and track their status)
+- **Email:** student@riva.edu.ng
+- **Password:** Password123
+- **ID:** RIVA-STU-001
 
-To learn more about Next.js, take a look at the following resources:
+## Running Locally
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+If you want to spin this up on your local machine:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. Clone the repo and install dependencies:
+   ```bash
+   npm install
+   ```
 
-## Deploy on Vercel
+2. Set up your `.env` file with your database URL and JWT secret:
+   ```env
+   DATABASE_URL="your_postgresql_url"
+   JWT_SECRET="your_secret_key"
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+3. Push the schema to your database and seed the default users:
+   ```bash
+   npx prisma db push
+   npx prisma db seed
+   ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+4. Start the dev server:
+   ```bash
+   npm run dev
+   ```
+
+Open `http://localhost:3000` to view it in the browser.
