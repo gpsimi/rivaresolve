@@ -5,14 +5,14 @@ import { signJWT, verifyJWT, UserSession } from "@/lib/auth";
 describe("JWT Role-Based Access Control Token Tests", () => {
   const mockAdminSession: UserSession = {
     userId: "user-admin-123",
-    email: "admin@miva.edu.ng",
+    email: "admin@riva.edu.ng",
     role: "ADMINISTRATOR",
     name: "System Admin",
   };
 
   const mockStudentSession: UserSession = {
     userId: "user-student-456",
-    email: "student@miva.edu.ng",
+    email: "student@riva.edu.ng",
     role: "STUDENT_STAFF",
     name: "Amara Student",
   };
