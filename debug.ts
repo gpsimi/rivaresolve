@@ -4,7 +4,8 @@ async function test() {
     const users = await prisma.user.findMany();
     console.log('USERS:', users);
   } catch (e) {
-    console.error('ERROR:', e.message);
+    const errorMessage = e instanceof Error ? e.message : 'Unknown error';
+    console.error('ERROR:', errorMessage);
   } finally {
     await prisma.$disconnect();
   }
