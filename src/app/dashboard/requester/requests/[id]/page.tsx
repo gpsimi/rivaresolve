@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useEffect, use } from "react";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -73,8 +72,9 @@ export default function RequestDetailsPage({
         }
         const data = await response.json();
         setRequest(data);
-      } catch (err: any) {
-        setError(err.message || "Failed to load request details");
+      } catch (err) {
+        const errorMessage = err instanceof Error ? err.message : "Failed to load request details";
+        setError(errorMessage);
       } finally {
         setLoading(false);
       }
@@ -263,10 +263,10 @@ export default function RequestDetailsPage({
             </CardHeader>
             <CardContent className="pt-6">
               <div className="relative border-l border-slate-100 dark:border-slate-850 ml-3 pl-6 space-y-6">
-                {request.statusLogs.map((log, idx) => (
+                {request.statusLogs.map((log) => (
                   <div key={log.id} className="relative">
                     {/* Stepper Dot node */}
-                    <div className="absolute -left-[30px] top-1.5 h-3 w-3 rounded-full border bg-white border-blue-900 dark:bg-slate-950 dark:border-blue-600"></div>
+                    <div className="absolute left-[-30px] top-1.5 h-3 w-3 rounded-full border bg-white border-blue-900 dark:bg-slate-950 dark:border-blue-600"></div>
 
                     <div className="space-y-1 text-sm">
                       <div className="flex flex-wrap items-center justify-between gap-1.5">
@@ -287,7 +287,7 @@ export default function RequestDetailsPage({
                       </p>
                       {log.comment && (
                         <p className="mt-1.5 text-slate-600 dark:text-slate-350 p-2.5 rounded bg-slate-50/50 border border-slate-200/20 dark:bg-slate-900/40 italic">
-                          "{log.comment}"
+                          &ldquo;{log.comment}&rdquo;
                         </p>
                       )}
                     </div>

@@ -90,7 +90,7 @@ export async function POST(request: Request) {
       { message: "Registration successful", user: newUser },
       { status: 201 }
     );
-  } catch (error: any) {
+  } catch (error) {
     console.error("Registration error:", error);
     return NextResponse.json(
       { error: "Something went wrong. Please try again." },

@@ -77,22 +77,11 @@ export async function POST(request: Request) {
         const bytes = await file.arrayBuffer();
         const buffer = Buffer.from(bytes);
 
-        // Generate unique filename to prevent collisions
-        const fileExtension = path.extname(file.name) || ".jpg";
-        const uniqueFilename = `${Date.now()}-${Math.random()
-          .toString(36)
-          .substring(2, 9)}${fileExtension}`;
-
-        const uploadPath = path.join(
-          process.cwd(),
-          "public",
-          "uploads",
-          uniqueFilename
-        );
-
-        // Write file to public/uploads
-        await writeFile(uploadPath, buffer);
-        imageUrl = `/uploads/${uniqueFilename}`;
+        // Convert the image to a Base64 string
+        // We do this because Vercel has a read-only filesystem and cannot write to public/uploads
+        const base64Data = buffer.toString("base64");
+        const mimeType = file.type || "image/jpeg";
+        imageUrl = `data:${mimeType};base64,${base64Data}`;
       } catch (uploadError) {
         console.error("Image upload failed:", uploadError);
         return NextResponse.json(

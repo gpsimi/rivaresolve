@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { Eye, EyeOff } from "lucide-react";
@@ -46,6 +46,12 @@ export default function RegisterPage() {
       confirmPassword: "",
       role: "STUDENT_STAFF",
     },
+  });
+
+  const role = useWatch({
+    control: form.control,
+    name: "role",
+    defaultValue: "STUDENT_STAFF",
   });
 
   const onSubmit = async (values: RegisterFormValues) => {
@@ -157,11 +163,11 @@ export default function RegisterPage() {
                 render={({ field }) => (
                   <FormItem className="space-y-1">
                     <FormLabel className="text-slate-700 dark:text-slate-350 font-semibold text-xs uppercase tracking-wider">
-                      {form.watch("role") === "MAINTENANCE_OFFICER" ? "Employee ID" : "Matric Number"}
+                      {role === "MAINTENANCE_OFFICER" ? "Employee ID" : "Matric Number"}
                     </FormLabel>
                     <FormControl>
                       <Input
-                        placeholder={form.watch("role") === "MAINTENANCE_OFFICER" ? "RIVA-OFF-001" : "RIVA/STU/2026/001"}
+                        placeholder={role === "MAINTENANCE_OFFICER" ? "RIVA-OFF-001" : "RIVA/STU/2026/001"}
                         disabled={loading}
                         className="w-full border-slate-200 dark:border-slate-800 bg-transparent px-4 py-3 rounded-lg focus-visible:ring-blue-900 dark:focus-visible:ring-blue-500"
                         {...field}
