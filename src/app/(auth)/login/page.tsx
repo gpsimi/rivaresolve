@@ -28,7 +28,7 @@ function LoginForm() {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-  const [rememberMe, setRememberMe] = useState(false);
+  
 
   const form = useForm<LoginFormValues>({
     resolver: zodResolver(loginSchema),
@@ -72,7 +72,7 @@ function LoginForm() {
       {/* Left Column: Form Section */}
       <div className="w-full md:w-1/2 flex flex-col justify-between p-8 lg:p-16">
         {/* Header Logo */}
-        <div className="flex flex-col items-start mb-8 md:mb-0">
+        <Link href="/" className="flex flex-col items-start mb-8 md:mb-0">
           <div className="flex items-center space-x-2">
             <SiDavinciresolve className="h-5 w-5 text-blue-900 dark:text-blue-450 shrink-0" />
             <span className="text-xl font-black tracking-wider text-blue-900 dark:text-blue-450">
@@ -82,7 +82,7 @@ function LoginForm() {
           <span className="text-[10px] text-slate-400 dark:text-slate-500 font-medium">
             Built by <span className="font-semibold text-slate-500 dark:text-slate-400">Godspower Aghorunse</span>
           </span>
-        </div>
+        </Link>
 
         {/* Form Container */}
         <div className="max-w-md w-full mx-auto my-auto space-y-6 py-8">
@@ -157,24 +157,7 @@ function LoginForm() {
               />
 
               {/* Remember Me and Forgot Password */}
-              <div className="flex items-center justify-between pt-1">
-                <label className="flex items-center space-x-2 cursor-pointer select-none">
-                  <input
-                    type="checkbox"
-                    checked={rememberMe}
-                    onChange={(e) => setRememberMe(e.target.checked)}
-                    className="rounded border-slate-300 text-blue-900 focus:ring-blue-900 dark:border-slate-800 dark:bg-slate-900 dark:checked:bg-blue-600"
-                  />
-                  <span className="text-xs text-slate-500 dark:text-slate-450 font-medium">Remember Me</span>
-                </label>
-                <Link
-                  href="/login"
-                  onClick={() => alert("Please contact the administrator to reset your password.")}
-                  className="text-xs font-semibold text-blue-900 hover:underline dark:text-blue-450"
-                >
-                  Forgot Your Password?
-                </Link>
-              </div>
+              
 
               <Button
                 type="submit"

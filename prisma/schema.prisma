@@ -16,9 +16,10 @@ model Role {
 }
 
 model User {
-  id           String           @id @default(uuid())
-  email        String           @unique
-  passwordHash String
+  id              String           @id @default(uuid())
+  email           String           @unique
+  institutionalId String?          @unique
+  passwordHash    String
   name         String
   roleId       String
   role         Role             @relation(fields: [roleId], references: [id])

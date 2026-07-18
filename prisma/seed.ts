@@ -52,10 +52,11 @@ async function main() {
   console.log("Creating default users...");
   const adminUser = await prisma.user.upsert({
     where: { email: "admin@riva.edu.ng" },
-    update: { passwordHash: dummyPasswordHash },
+    update: { passwordHash: dummyPasswordHash, institutionalId: "RIVA-ADM-001" },
     create: {
       email: "admin@riva.edu.ng",
       name: "System Administrator",
+      institutionalId: "RIVA-ADM-001",
       passwordHash: dummyPasswordHash,
       roleId: adminRole.id,
     },
@@ -63,10 +64,11 @@ async function main() {
 
   const officerUser = await prisma.user.upsert({
     where: { email: "officer@riva.edu.ng" },
-    update: { passwordHash: dummyPasswordHash },
+    update: { passwordHash: dummyPasswordHash, institutionalId: "RIVA-OFF-001" },
     create: {
       email: "officer@riva.edu.ng",
       name: "Tunde Officer",
+      institutionalId: "RIVA-OFF-001",
       passwordHash: dummyPasswordHash,
       roleId: officerRole.id,
     },
@@ -74,19 +76,20 @@ async function main() {
 
   const studentUser = await prisma.user.upsert({
     where: { email: "student@riva.edu.ng" },
-    update: { passwordHash: dummyPasswordHash },
+    update: { passwordHash: dummyPasswordHash, institutionalId: "RIVA-STU-001" },
     create: {
       email: "student@riva.edu.ng",
       name: "Amara Student",
+      institutionalId: "RIVA-STU-001",
       passwordHash: dummyPasswordHash,
       roleId: studentRole.id,
     },
   });
 
   console.log(`Default users created:
-  - Admin: admin@riva.edu.ng (Password123)
-  - Officer: officer@riva.edu.ng (Password123)
-  - Student: student@riva.edu.ng (Password123)`);
+  - Admin: admin@riva.edu.ng (Password123) [ID: RIVA-ADM-001]
+  - Officer: officer@riva.edu.ng (Password123) [ID: RIVA-OFF-001]
+  - Student: student@riva.edu.ng (Password123) [ID: RIVA-STU-001]`);
 
   console.log("✅ Seeding completed successfully!");
 }

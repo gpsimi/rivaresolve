@@ -15,6 +15,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 
 const registerSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters long"),
+  institutionalId: z.string().min(4, "ID must be at least 4 characters long"),
   email: z.string().min(1, "Email is required").email("Invalid email address"),
   password: z.string().min(6, "Password must be at least 6 characters long"),
   confirmPassword: z.string().min(6, "Confirm password is required"),
@@ -39,6 +40,7 @@ export default function RegisterPage() {
     resolver: zodResolver(registerSchema),
     defaultValues: {
       name: "",
+      institutionalId: "",
       email: "",
       password: "",
       confirmPassword: "",
@@ -59,6 +61,7 @@ export default function RegisterPage() {
         },
         body: JSON.stringify({
           name: values.name,
+          institutionalId: values.institutionalId,
           email: values.email,
           password: values.password,
           role: values.role,
@@ -91,7 +94,7 @@ export default function RegisterPage() {
       {/* Left Column: Form Section */}
       <div className="w-full md:w-1/2 flex flex-col justify-between p-8 lg:p-16 overflow-y-auto">
         {/* Header Logo */}
-        <div className="flex flex-col items-start mb-6 md:mb-0">
+        <Link href="/" className="flex flex-col items-start mb-6 md:mb-0">
           <div className="flex items-center space-x-2">
             <SiDavinciresolve className="h-5 w-5 text-blue-900 dark:text-blue-450 shrink-0" />
             <span className="text-xl font-black tracking-wider text-blue-900 dark:text-blue-450">
@@ -101,7 +104,7 @@ export default function RegisterPage() {
           <span className="text-[10px] text-slate-400 dark:text-slate-500 font-medium">
             Built by <span className="font-semibold text-slate-500 dark:text-slate-400">Godspower Aghorunse</span>
           </span>
-        </div>
+        </Link>
 
         {/* Form Container */}
         <div className="max-w-md w-full mx-auto my-auto space-y-5 py-6">
@@ -138,6 +141,27 @@ export default function RegisterPage() {
                     <FormControl>
                       <Input
                         placeholder="John Doe"
+                        disabled={loading}
+                        className="w-full border-slate-200 dark:border-slate-800 bg-transparent px-4 py-3 rounded-lg focus-visible:ring-blue-900 dark:focus-visible:ring-blue-500"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="institutionalId"
+                render={({ field }) => (
+                  <FormItem className="space-y-1">
+                    <FormLabel className="text-slate-700 dark:text-slate-350 font-semibold text-xs uppercase tracking-wider">
+                      {form.watch("role") === "MAINTENANCE_OFFICER" ? "Employee ID" : "Matric Number"}
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder={form.watch("role") === "MAINTENANCE_OFFICER" ? "RIVA-OFF-001" : "RIVA/STU/2026/001"}
                         disabled={loading}
                         className="w-full border-slate-200 dark:border-slate-800 bg-transparent px-4 py-3 rounded-lg focus-visible:ring-blue-900 dark:focus-visible:ring-blue-500"
                         {...field}

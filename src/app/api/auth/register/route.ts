@@ -4,12 +4,12 @@ import { hashPassword } from "@/lib/password";
 
 export async function POST(request: Request) {
   try {
-    const { email, password, name, role } = await request.json();
+    const { email, password, name, role, institutionalId } = await request.json();
 
     // 1. Basic validation
-    if (!email || !password || !name || !role) {
+    if (!email || !password || !name || !role || !institutionalId) {
       return NextResponse.json(
-        { error: "Name, email, password, and role are required" },
+        { error: "Name, institutional ID, email, password, and role are required" },
         { status: 400 }
       );
     }
@@ -36,6 +36,18 @@ export async function POST(request: Request) {
       );
     }
 
+    // Check if institutional ID already exists
+    const existingId = await prisma.user.findUnique({
+      where: { institutionalId: institutionalId.trim() },
+    });
+
+    if (existingId) {
+      return NextResponse.json(
+        { error: "This Matric Number / Employee ID is already registered" },
+        { status: 400 }
+      );
+    }
+
     // 4. Find the requested role in the database
     const requestedRole = role === "MAINTENANCE_OFFICER" ? "MAINTENANCE_OFFICER" : "STUDENT_STAFF";
     let dbRole = await prisma.role.findUnique({
@@ -57,6 +69,7 @@ export async function POST(request: Request) {
       data: {
         email: normalizedEmail,
         name: name.trim(),
+        institutionalId: institutionalId.trim(),
         passwordHash: hashedPassword,
         roleId: dbRole.id,
       },
