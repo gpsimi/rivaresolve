@@ -2,11 +2,11 @@ import React from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { 
-  Wrench, 
   Clock, 
   ShieldCheck, 
   ArrowRight,
-  ClipboardList
+  ClipboardList,
+  Wrench
 } from "lucide-react";
 
 export default function Home() {
@@ -14,9 +14,15 @@ export default function Home() {
     <div className="flex flex-col min-h-screen bg-slate-50 dark:bg-slate-950 font-sans">
       {/* Navigation Header */}
       <header className="px-6 lg:px-12 py-5 bg-white dark:bg-slate-900 border-b border-slate-200/60 dark:border-slate-800 flex items-center justify-between">
-        <div className="flex items-center space-x-2">
-          <span className="text-xl font-black tracking-wider text-blue-900 dark:text-blue-450">
-            MIVA<span className="text-red-600 dark:text-red-505">RESOLVE</span>
+        <div className="flex flex-col items-start">
+          <div className="flex items-center space-x-2">
+            <Wrench className="h-5 w-5 text-blue-900 dark:text-blue-450 shrink-0" />
+            <span className="text-xl font-black tracking-wider text-blue-900 dark:text-blue-450">
+              RIVA<span className="text-red-600 dark:text-red-500">RESOLVE</span>
+            </span>
+          </div>
+          <span className="text-[10px] text-slate-400 dark:text-slate-500 font-medium">
+            Built by <span className="font-semibold text-slate-500 dark:text-slate-400">Godspower Aghorunse</span>
           </span>
         </div>
         <div className="flex items-center space-x-4">
@@ -36,15 +42,15 @@ export default function Home() {
       {/* Hero Section */}
       <main className="flex-1 flex flex-col justify-center px-6 lg:px-12 py-16 md:py-24 max-w-5xl mx-auto space-y-12">
         <div className="text-center space-y-6">
-          <span className="px-3 py-1 text-xs font-semibold bg-blue-50 text-blue-900 border border-blue-150 rounded-full dark:bg-blue-950/30 dark:border-blue-900/50 dark:text-blue-400">
-            Advanced Web Application CA — MIT 8333
+          <span className="px-3 py-1 text-xs font-semibold tracking-widest bg-blue-50 text-blue-900 border border-blue-150 rounded-full dark:bg-blue-950/30 dark:border-blue-900/50 dark:text-blue-400">
+            RIVA UNIVERSITY RESOLVE
           </span>
           <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight text-slate-800 dark:text-slate-100 max-w-3xl mx-auto leading-tight">
-            Campus Maintenance <br />
-            <span className="text-blue-900 dark:text-blue-450">Resolved Effortlessly</span>
+            Report, Track & Fix <br />
+            <span className="text-blue-900 dark:text-blue-450">Campus Issues Easily</span>
           </h1>
           <p className="text-lg md:text-xl text-slate-500 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed">
-            MivaResolve is the university's digital portal for reporting faulty utilities, damaged furniture, and tracking repairs in real-time.
+            RivaResolve is the university&apos;s digital portal for reporting faulty utilities, damaged furniture, and tracking repairs in real-time.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
             <Link href="/login" className="w-full sm:w-auto">
@@ -96,8 +102,11 @@ export default function Home() {
       </main>
 
       {/* Footer */}
-      <footer className="py-8 bg-white dark:bg-slate-900 border-t border-slate-200/60 dark:border-slate-800 text-center text-xs text-slate-450 dark:text-slate-500">
-        <p>© Copyright 2026 MIVA Open University. All Rights Reserved.</p>
+      <footer className="py-8 bg-white dark:bg-slate-900 border-t border-slate-200/60 dark:border-slate-800 text-center text-xs text-slate-450 dark:text-slate-500 space-y-2">
+        <p>© Copyright 2026 RIVA Open University. All Rights Reserved.</p>
+        <p className="text-[11px] text-slate-400 dark:text-slate-550">
+          Built by <span className="font-semibold text-slate-500 dark:text-slate-400">Godspower Aghorunse</span>
+        </p>
       </footer>
     </div>
   );

@@ -14,7 +14,8 @@ import {
   Wrench,
   UserCheck,
   Calendar,
-  AlertTriangle
+  AlertTriangle,
+  Download
 } from "lucide-react";
 
 interface Request {
@@ -203,6 +204,13 @@ export default function AdminRequestsPage() {
               <option value="RESOLVED">Resolved</option>
             </select>
           </div>
+
+          <a href="/api/admin/export" download="rivaresolve_complaints.csv" className="w-full sm:w-auto">
+            <Button variant="outline" className="w-full border-slate-200 dark:border-slate-750 text-slate-700 dark:text-slate-350 flex items-center justify-center gap-1.5 h-10 font-semibold cursor-pointer">
+              <Download size={16} />
+              Export CSV
+            </Button>
+          </a>
         </CardContent>
       </Card>
 

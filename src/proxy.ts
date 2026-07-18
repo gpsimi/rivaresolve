@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { jwtVerify } from "jose";
 
 const JWT_SECRET = new TextEncoder().encode(
-  process.env.JWT_SECRET || "mivaresolve_mit8333_super_secret_session_key_2026"
+  process.env.JWT_SECRET || "rivaresolve_mit8333_super_secret_session_key_2026"
 );
 
 export default async function proxy(request: NextRequest) {
@@ -23,7 +23,7 @@ export default async function proxy(request: NextRequest) {
         } else {
           return NextResponse.redirect(new URL("/dashboard/requester", request.url));
         }
-      } catch (error) {
+      } catch {
         // Token invalid, let them view login/register
       }
     }
@@ -68,7 +68,7 @@ export default async function proxy(request: NextRequest) {
       }
 
       return NextResponse.next();
-    } catch (error) {
+    } catch {
       // Invalid/Expired Token - clear cookie and redirect to login
       const response = NextResponse.redirect(new URL("/login", request.url));
       response.cookies.delete("session");

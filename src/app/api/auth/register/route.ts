@@ -4,12 +4,12 @@ import { hashPassword } from "@/lib/password";
 
 export async function POST(request: Request) {
   try {
-    const { email, password, name } = await request.json();
+    const { email, password, name, role } = await request.json();
 
     // 1. Basic validation
-    if (!email || !password || !name) {
+    if (!email || !password || !name || !role) {
       return NextResponse.json(
-        { error: "Name, email, and password are required" },
+        { error: "Name, email, password, and role are required" },
         { status: 400 }
       );
     }
@@ -36,15 +36,16 @@ export async function POST(request: Request) {
       );
     }
 
-    // 4. Find the STUDENT_STAFF role in the database
-    let studentRole = await prisma.role.findUnique({
-      where: { name: "STUDENT_STAFF" },
+    // 4. Find the requested role in the database
+    const requestedRole = role === "MAINTENANCE_OFFICER" ? "MAINTENANCE_OFFICER" : "STUDENT_STAFF";
+    let dbRole = await prisma.role.findUnique({
+      where: { name: requestedRole },
     });
 
     // If the roles haven't been seeded yet, fallback creation
-    if (!studentRole) {
-      studentRole = await prisma.role.create({
-        data: { name: "STUDENT_STAFF" },
+    if (!dbRole) {
+      dbRole = await prisma.role.create({
+        data: { name: requestedRole },
       });
     }
 
@@ -57,7 +58,7 @@ export async function POST(request: Request) {
         email: normalizedEmail,
         name: name.trim(),
         passwordHash: hashedPassword,
-        roleId: studentRole.id,
+        roleId: dbRole.id,
       },
       select: {
         id: true,

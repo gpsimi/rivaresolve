@@ -46,15 +46,15 @@ async function main() {
   console.log(`Categories created: ${categories.join(", ")}`);
 
   // 3. Seed Users
-  // Mock bcrypt hash of "Password123"
-  const dummyPasswordHash = "$2a$12$LRY/0Hpxp7v8PspLqjXp6OxmCq1kL7Cq7sS/J.Lw4R8eUjGjWzY6i";
+  // Correct bcrypt hash of "Password123"
+  const dummyPasswordHash = "$2b$10$FUtFSps1YMaO07jTRE8lqOZHa3FR7J5CPRANjADoo6PeYJ2aFEudy";
 
   console.log("Creating default users...");
   const adminUser = await prisma.user.upsert({
-    where: { email: "admin@miva.edu.ng" },
-    update: {},
+    where: { email: "admin@riva.edu.ng" },
+    update: { passwordHash: dummyPasswordHash },
     create: {
-      email: "admin@miva.edu.ng",
+      email: "admin@riva.edu.ng",
       name: "System Administrator",
       passwordHash: dummyPasswordHash,
       roleId: adminRole.id,
@@ -62,10 +62,10 @@ async function main() {
   });
 
   const officerUser = await prisma.user.upsert({
-    where: { email: "officer@miva.edu.ng" },
-    update: {},
+    where: { email: "officer@riva.edu.ng" },
+    update: { passwordHash: dummyPasswordHash },
     create: {
-      email: "officer@miva.edu.ng",
+      email: "officer@riva.edu.ng",
       name: "Tunde Officer",
       passwordHash: dummyPasswordHash,
       roleId: officerRole.id,
@@ -73,10 +73,10 @@ async function main() {
   });
 
   const studentUser = await prisma.user.upsert({
-    where: { email: "student@miva.edu.ng" },
-    update: {},
+    where: { email: "student@riva.edu.ng" },
+    update: { passwordHash: dummyPasswordHash },
     create: {
-      email: "student@miva.edu.ng",
+      email: "student@riva.edu.ng",
       name: "Amara Student",
       passwordHash: dummyPasswordHash,
       roleId: studentRole.id,
@@ -84,9 +84,9 @@ async function main() {
   });
 
   console.log(`Default users created:
-  - Admin: admin@miva.edu.ng (Password123)
-  - Officer: officer@miva.edu.ng (Password123)
-  - Student: student@miva.edu.ng (Password123)`);
+  - Admin: admin@riva.edu.ng (Password123)
+  - Officer: officer@riva.edu.ng (Password123)
+  - Student: student@riva.edu.ng (Password123)`);
 
   console.log("✅ Seeding completed successfully!");
 }

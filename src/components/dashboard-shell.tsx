@@ -12,9 +12,8 @@ import {
   LogOut, 
   Menu, 
   X, 
-  User, 
-  Settings,
-  Bell
+  Bell,
+  Wrench
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { UserSession } from "@/lib/auth";
@@ -77,9 +76,17 @@ export default function DashboardShell({ children, session }: DashboardShellProp
     <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex flex-col md:flex-row">
       {/* Mobile Header */}
       <header className="flex md:hidden items-center justify-between px-6 py-4 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 z-30">
-        <span className="text-lg font-black tracking-wider text-blue-900 dark:text-blue-400">
-          MIVA<span className="text-red-600 dark:text-red-500">RESOLVE</span>
-        </span>
+        <div className="flex flex-col items-start">
+          <div className="flex items-center space-x-1.5">
+            <Wrench className="h-4 w-4 text-blue-900 dark:text-blue-400 shrink-0" />
+            <span className="text-lg font-black tracking-wider text-blue-900 dark:text-blue-400">
+              RIVA<span className="text-red-600 dark:text-red-500">RESOLVE</span>
+            </span>
+          </div>
+          <span className="text-[9px] text-slate-405 dark:text-slate-500 font-medium">
+            Built by Godspower Aghorunse
+          </span>
+        </div>
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           className="p-2 text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-300 focus:outline-none"
@@ -96,9 +103,15 @@ export default function DashboardShell({ children, session }: DashboardShellProp
       >
         <div className="flex flex-col h-full">
           {/* Brand Logo Header */}
-          <div className="hidden md:flex items-center px-6 py-6 border-b border-slate-100 dark:border-slate-800">
-            <span className="text-xl font-black tracking-wider text-blue-900 dark:text-blue-400">
-              MIVA<span className="text-red-600 dark:text-red-500">RESOLVE</span>
+          <div className="hidden md:flex flex-col items-start px-6 py-6 border-b border-slate-100 dark:border-slate-800">
+            <div className="flex items-center space-x-2">
+              <Wrench className="h-5 w-5 text-blue-900 dark:text-blue-400 shrink-0" />
+              <span className="text-xl font-black tracking-wider text-blue-900 dark:text-blue-400">
+                RIVA<span className="text-red-600 dark:text-red-500">RESOLVE</span>
+              </span>
+            </div>
+            <span className="text-[10px] text-slate-400 dark:text-slate-500 mt-1 font-medium">
+              Built by <span className="font-semibold text-slate-500 dark:text-slate-450">Godspower Aghorunse</span>
             </span>
           </div>
 
@@ -178,8 +191,16 @@ export default function DashboardShell({ children, session }: DashboardShellProp
         </header>
 
         {/* Content Body */}
-        <main className="flex-1 overflow-y-auto px-6 py-6 md:px-8 md:py-8">
-          {children}
+        <main className="flex-1 overflow-y-auto px-6 py-6 md:px-8 md:py-8 flex flex-col justify-between">
+          <div className="flex-1">
+            {children}
+          </div>
+          <footer className="mt-8 pt-4 border-t border-slate-200/60 dark:border-slate-800/80 text-center text-xs text-slate-450 dark:text-slate-500">
+            <p>© Copyright 2026 RIVA Open University. All Rights Reserved.</p>
+            <p className="text-[11px] text-slate-400 dark:text-slate-550 mt-1">
+              Built by <span className="font-semibold text-slate-500 dark:text-slate-400">Godspower Aghorunse</span>
+            </p>
+          </footer>
         </main>
       </div>
 

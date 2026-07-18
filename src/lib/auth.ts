@@ -2,7 +2,7 @@ import { SignJWT, jwtVerify } from "jose";
 import { cookies } from "next/headers";
 
 const JWT_SECRET = new TextEncoder().encode(
-  process.env.JWT_SECRET || "mivaresolve_mit8333_super_secret_session_key_2026"
+  process.env.JWT_SECRET || "rivaresolve_mit8333_super_secret_session_key_2026"
 );
 
 export interface UserSession {
